@@ -1,0 +1,117 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.3226861852220463 0.8838292454421599 0.3387026583420709 1.6837149205772894
+  position 1.5306694842387882 1.2715663723465869 0.09374377180423299
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 1 1
+  tileSize 0.2 0.2
+}
+WoodenBox {
+  translation 0.445729 0.05 -0.450443
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation 0.449575 0.05 0.450405
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation -0.446154 0.05 0.450165
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+E-puck {
+  controller "epuck_avoid_collision"
+}
+Solid {
+  translation 0 0.2 -0.2
+  children [
+    DEF BALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "textures/red_brick_wall.jpg"
+          ]
+        }
+        roughness 0.3
+      }
+      geometry DEF BALL_GEOMETRY Sphere {
+        radius 0.05
+        subdivision 2
+      }
+    }
+  ]
+  name "Ball 1"
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
+}
+Solid {
+  translation 0 0.2 0.2
+  children [
+    USE BALL_SHAPE
+  ]
+  name "Ball 2"
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
+}
+Solid {
+  translation 0 0.05 -0.51
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+        roughness 0.5
+        metalness 0
+      }
+      geometry DEF WALL_GEOMETRY Box {
+        size 1 0.1 0.01
+      }
+    }
+  ]
+  name "Wall"
+  boundingObject USE WALL_GEOMETRY
+}
+Solid {
+  translation 0 0.05 0.5
+  children [
+    USE WALL_SHAPE
+  ]
+  name "Wall(1)"
+  boundingObject USE WALL_GEOMETRY
+}
+Solid {
+  translation -0.500002 0.05 -0.009998
+  rotation 0 1 0 1.5708
+  children [
+    USE WALL_SHAPE
+  ]
+  name "Wall(2)"
+  boundingObject USE WALL_GEOMETRY
+}
+Solid {
+  translation 0.499998 0.05 -0.0100001
+  rotation 0 1 0 1.5708
+  children [
+    USE WALL_SHAPE
+  ]
+  name "Wall(3)"
+  boundingObject USE WALL_GEOMETRY
+}
+PointLight {
+  attenuation 0 0 1
+  location 0 0.3 0
+}
